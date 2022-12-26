@@ -51,7 +51,18 @@ with first_chart:
 with second_chart:
     CAGR_data = pd.read_csv('CAGR_data.csv')
     print('CAGR_data', CAGR_data)
-    chart_data = px.pie(CAGR_data, names="Country", values='CAGR')
+    chart_data = px.pie(CAGR_data, names="Country", values='CAGR',hole=0.4)
+    chart_data.update_layout(
+        title={  # 设置整个标题的名称和位置
+            "text": "Compound Annual Growth Rate",
+            "y": 0.96,  # y轴数值
+            "x": 0.5,  # x轴数值
+            "xanchor": "center",  # x、y轴相对位置
+            "yanchor": "top"
+        }
+    )
+    chart_data.update_traces(textposition='inside',
+                      textinfo='percent+label')
     st.plotly_chart(chart_data)
 
 st.markdown("<hr/>", unsafe_allow_html=True)
